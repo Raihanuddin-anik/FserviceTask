@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form } from 'react-bootstrap';
+import { Button, Form, FormSelect } from 'react-bootstrap';
 
 
 const ContainerPage = ({ data, TogglePage }) => {
@@ -7,6 +7,8 @@ const ContainerPage = ({ data, TogglePage }) => {
     const [StudentInfo, setStudentInfo] = useState({
         sId: '',
         sName: '',
+        roll: '',
+        shift: '',
         age: '',
         class: '',
         hall: '',
@@ -17,17 +19,31 @@ const ContainerPage = ({ data, TogglePage }) => {
         fPrice: '',
         fId: ''
     })
-    console.log(StudentInfo)
+    const handeSubmitStudentInfo = () => {
+        console.log(StudentInfo)
+        fetch('http://localhost:4000/addStudent', {
+            method: 'POST',
+            body: JSON.stringify(StudentInfo),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        })
+            .then((response) => response.json())
+            .then((json) => console.log(json));
+    }
     const handleSetValue = (e) => {
         if (TogglePage === 'addStudent') {
             const sValue = { ...StudentInfo }
             sValue[e.target.name] = e.target.value;
             setStudentInfo(sValue)
         }
-        else if (TogglePage === 'addFood'){
-            const FValue = {...FoodInfo}
+        else if (TogglePage === 'addFood') {
+            const FValue = { ...FoodInfo }
             FValue[e.target.name] = e.target.value;
             setFoodInfo(FValue)
+        }
+        else {
+            console.log(' ')
         }
     }
     return (
@@ -55,11 +71,11 @@ const ContainerPage = ({ data, TogglePage }) => {
                     <from style={{ padding: "20px", borderRadius: "10px" }} >
 
 
-                        <Form.Control name="fName" className="w-50" placeholder="Food Name" />
+                        <Form.Control name="fName" onBlur={handleSetValue} className="w-50" placeholder="Food Name" />
                         <br />
-                        <Form.Control name="fPrice" className="w-50" placeholder="Food Price" />
+                        <Form.Control name="fPrice" onBlur={handleSetValue} className="w-50" placeholder="Food Price" />
                         <br />
-                        <Form.Control name="fId" className="w-50" placeholder="Food Id" />
+                        <Form.Control name="fId" onBlur={handleSetValue} className="w-50" placeholder="Food Id" />
                         <br />
 
 
@@ -79,19 +95,51 @@ const ContainerPage = ({ data, TogglePage }) => {
                         <br />
                         <Form.Control name="sName" className="w-50" onBlur={handleSetValue} placeholder="Student Name" />
                         <br />
-                        <Form.Control name="age" className="w-50" onBlur={handleSetValue} placeholder=" Age" />
+                        <Form.Control type="number" name="age" className="w-50" onBlur={handleSetValue} placeholder=" Age" />
                         <br />
-                        <Form.Control name="class" className="w-50" onBlur={handleSetValue} placeholder="Class" />
+                        <Form.Control type="number" name="roll" className="w-50" onBlur={handleSetValue} placeholder=" Roll" />
+                        <br />
+                        <Form.Control type="number" name="class" className="w-50" onBlur={handleSetValue} placeholder="Class" />
                         <br />
                         <Form.Control name="hall" className="w-50" onBlur={handleSetValue} placeholder="Hall" />
                         <br />
-                        <Form.Control name="status" className="w-50" onBlur={handleSetValue} placeholder="Status" />
+                        <Form.Select name="status" className='w-50' aria-label="Default select example" placeholder="Status" >
+                            <option value="Active">Active</option>
+                            <option value="InActive">InActive</option>
+                        </Form.Select>
+                        <br />
 
-                        <input className="btn btn-primary w-50" type="submit" />
-
+                        <Button onClick={() => handeSubmitStudentInfo()} className="btn btn-primary w-50" type="submit" >Submit</Button>
 
                     </from>}
+                {TogglePage === 'distribution' &&
+                    <from style={{ padding: "20px", borderRadius: "10px" }} >
 
+
+                        <br />
+                        <Form.Control name="Id" className="w-50" onBlur={handleSetValue} placeholder="Id" />
+                        <br />
+                        <Form.Control name="sId" className="w-50" onBlur={handleSetValue} placeholder="Student Id" />
+                        <br />
+                        <Form.Control name="date" type='date' className="w-50" onBlur={handleSetValue} placeholder="Student Name" />
+                        <br />
+                        <Form.Select name="status" className='w-50' aria-label="Default select example" placeholder="Status" >
+                            <option value="Active">Shift1</option>
+                            <option value="InActive">Shift2</option>
+                            <option value="InActive">Shift3</option>
+                        </Form.Select>
+                        <br />
+                        <Form.Control type="number" name="roll" className="w-50" onBlur={handleSetValue} placeholder=" Roll" />
+                        <br />
+                        <Form.Select name="status" className='w-50' aria-label="Default select example" placeholder="Status" >
+                            <option value="Active">FoodItemList</option>
+                            <option value="InActive">InActive</option>
+                        </Form.Select>
+                        <br />
+
+                        <Button onClick={() => handeSubmitStudentInfo()} className="btn btn-primary w-50" type="submit" >Submit</Button>
+
+                    </from>}
 
             </div>
 

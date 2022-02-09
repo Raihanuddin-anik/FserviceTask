@@ -14,6 +14,9 @@ const SideBar = ({setTogglePage}) => {
                 <div className="p-2 ">
                     <b style={{ cursor:"pointer"}} onClick={()=>setTogglePage('addStudent')}>Add Student</b>
                 </div>
+                <div className="p-2 ">
+                    <b style={{ cursor:"pointer"}} onClick={()=>setTogglePage('distribution')}>Distribution</b>
+                </div>
             </div>
 
 
