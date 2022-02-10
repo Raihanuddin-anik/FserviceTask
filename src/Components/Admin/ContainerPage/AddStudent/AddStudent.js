@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
-
+import Notifications, {notify} from 'react-notify-toast';
 const AddStudent = () => {
     const [StudentInfo, setStudentInfo] = useState({
         sId: '',
@@ -10,10 +10,12 @@ const AddStudent = () => {
         age: '',
         class: '',
         hall: '',
-        status: {}
+        status: ''
     })
+    let myColor = { background: '#0E1717', text: "#FFFFFF" };
+    const showNotification = () => notify.show('Student Info Added!', "custom", 2000,myColor);
     const handeSubmitStudentInfo = () => {
-        console.log(StudentInfo)
+        
         fetch('http://localhost:4000/addStudent', {
             method: 'POST',
             body: JSON.stringify(StudentInfo),
@@ -22,7 +24,13 @@ const AddStudent = () => {
             },
         })
             .then((response) => response.json())
-            .then((json) => console.log(json));
+            .then((json) =>{
+             if(json === true){
+                showNotification()
+             }
+            });
+          
+
     }
     const handleSetValue = (e) => {
        
@@ -33,6 +41,7 @@ const AddStudent = () => {
     }
     return (
         <div style={{width:"40rem",alignItems:"center",marginTop:"40px"}}>
+            <Notifications />
             <from  >
 
                 <Form.Control name="sId" className="w-100" onBlur={handleSetValue} placeholder="Student Id" />
@@ -53,7 +62,7 @@ const AddStudent = () => {
                 <Form.Control name="hall" onBlur={handleSetValue} placeholder="Hall" />
                 <br />
                 <br />
-                <Form.Control name="status"  aria-label="Default select example" placeholder="Status" />
+                <Form.Control name="status" onBlur={handleSetValue}  placeholder="Status" />
 
 
                 <br />
@@ -62,6 +71,7 @@ const AddStudent = () => {
                 <Button onClick={() => handeSubmitStudentInfo()} className="btn btn-primary w-100" type="submit" >Submit</Button>
 
             </from>
+          
         </div>
     );
 };

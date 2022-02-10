@@ -7,22 +7,24 @@ const SideBar = ({setTogglePage}) => {
             <div className="ms-5 p-4">
             
                 <div className="p-2 ">
-                    <Link to="/student" style={{ cursor:"pointer"}} >Student</Link>
+                    <Link to="/student" style={{ cursor:"pointer"}} >Students</Link>
                 </div>
                 <div className="p-2 ">
                     <Link to="/addStudent" style={{ cursor:"pointer"}} >Add Student</Link>
                 </div>
-                <div className="p-2 ">
-                    <Link to="/distribution" style={{ cursor:"pointer"}} >Distribution</Link>
-                </div>
+                
                 <div className="p-2 ">
                     <Link to="/addFood" style={{ cursor:"pointer"}} >addFood</Link>
                 </div>
                 <div className="p-2 ">
-                    <Link to="/food" style={{ cursor:"pointer"}} >Food</Link>
+                    <Link to="/food" style={{ cursor:"pointer"}} >Foods</Link>
+                </div>
+
+                <div className="p-2 ">
+                    <Link to="/distribution" style={{ cursor:"pointer"}} >Distribution</Link>
                 </div>
                 <div className="p-2 ">
-                    <b style={{ cursor:"pointer"}} >Distributed To Student</b>
+                    <Link to="delivered" style={{ cursor:"pointer"}} >Distributed Student Lists</Link>
                 </div>
             </div>
 

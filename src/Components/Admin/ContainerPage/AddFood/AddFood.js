@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Form } from 'react-bootstrap';
-
+import Notifications, {notify} from 'react-notify-toast';
 const AddFood = () => {
     const [FoodInfo, setFoodInfo] = useState({
         fName: '',
@@ -12,6 +12,8 @@ const AddFood = () => {
             FValue[e.target.name] = e.target.value;
             setFoodInfo(FValue)    
     }
+    let myColor = { background: '#0E1717', text: "#FFFFFF" };
+    const showNotification = () => notify.show('Food  Added!', "custom", 2000,myColor);
     const handleSubmitValue = () =>{
         fetch('http://localhost:4000/addFood', {
             method: 'POST',
@@ -21,11 +23,17 @@ const AddFood = () => {
             },
         })
             .then((response) => response.json())
-            .then((json) => console.log(json));
+            .then((json) =>{
+                console.log(json)
+                if(json === true){
+                   showNotification()
+                }
+               });
+             
     }
     return (
         <div style={{width:"40rem",alignItems:"center",marginTop:"40px"}}>
-              
+              <Notifications />
                     <from  >
                         <Form.Control name="fName" onBlur={handleSetValue}  placeholder="Food Name" />
                         <br />

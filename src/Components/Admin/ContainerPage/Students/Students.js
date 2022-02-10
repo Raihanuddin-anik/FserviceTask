@@ -18,9 +18,9 @@ const Students = () => {
         })
             .then(res => res.json())
             .then(result => setrefresh(result))
-        setShow(false)
+             setShow(false)
     }
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState('');
     const [students, setStudents] = useState([]);
     const [updateData, setUpdateData] = useState([])
     useEffect(() => {
@@ -41,11 +41,21 @@ const Students = () => {
             })
         reset()
     }
-
+    const  deleteProduct = (id)=>{
+        fetch(`http://localhost:4000/delete/${id}`,{
+            method: 'DELETE'
+        })
+        .then(res => res.json())
+        .then(result =>{
+           setrefresh('hello')
+        })
+      
+    }
     return (
         <div className='container-fluid'>
             <section style={{ overflowX: "auto" }}>
                 <table>
+                    <tbody>
                     <tr className='Table_Reader_Row'>
                         <th className="Table_Header" >STUDENT-Id</th>
                         <th className="Table_Header">ROLL</th>
@@ -54,6 +64,7 @@ const Students = () => {
                         <th className="Table_Header">CLASS </th>
                         <th className="Table_Header">HALL </th>
                         <th className="Table_Header">STATUS </th>
+                        <th className="Table_Header">Edit </th>
                     </tr>
                     {(students).map(Data =>
                         <tr className='Table_Reader_Row'>
@@ -63,10 +74,12 @@ const Students = () => {
                             <td className="Table_Data">{Data.age} <br /> </td>
                             <td className="Table_Data">{Data.class}</td>
                             <td className="Table_Data" >{Data.hall}</td>
-                            <td className="Table_Data" >Active</td>
-                            <td className="Table_Data" onClick={() => hadleGetData(Data._id)} >Edit</td>
+                            <td className="Table_Data" >{Data.status}</td>
+                            <td className="Table_Data Edit_Button" onClick={() => hadleGetData(Data._id)} ><Button >Edit</Button></td>
+                            <td className="Table_Data Edit_Button" onClick={() => deleteProduct(Data._id)} ><Button variant="danger" >Delete</Button></td>
                         </tr>
                     )}
+                    </tbody>
                 </table>
 
                 <Modal

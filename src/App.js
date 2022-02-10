@@ -13,23 +13,27 @@ import AddFood from './Components/Admin/ContainerPage/AddFood/AddFood';
 import AddStudent from './Components/Admin/ContainerPage/AddStudent/AddStudent';
 import Distribution from './Components/Admin/ContainerPage/Distribution/Distribution';
 import Foods from './Components/Admin/ContainerPage/Foods/Foods';
+import DistributedList from './Components/Admin/ContainerPage/DistributedList/DistributedList';
+import MainPage from './Components/MainPage/MainPage';
 
 function App() {
   return (
   
       <BrowserRouter>
-        <Row >
-          <Col md={4}>
+      
+        <Row>
+          <Col style={{border:"1px solid red"}} md={3}>
             <SideBar />
           </Col>
-          <Col md={8}>
+          <Col md={9} style={{border:"1px solid red"}}>
             <Routes>
-              <Route path="/" element={<Admin />} />
+              <Route path="/" element={<MainPage />} />
               <Route path="/student" element={<Students />} />
               <Route path="/food" element={<Foods />} />
               <Route path="/addFood" element={<AddFood />} />
               <Route path="/AddStudent" element={<AddStudent />} />
               <Route path="/distribution" element={<Distribution />} />
+              <Route path="/delivered" element={<DistributedList />} />
             </Routes>
           </Col>
         </Row>
