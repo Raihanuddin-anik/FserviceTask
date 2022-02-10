@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import ContainerPage from './ContainerPage';
+import ContainerPage from './ContainerPage/ContainerPage';
 import SideBar from './SideBar';
 
 
@@ -20,9 +20,7 @@ const Admin = () => {
        
             <div className="row">
 
-                <div className="col-md-3">
-                    <SideBar TogglePage={TogglePage} setTogglePage={setTogglePage}/>
-                </div>
+                
                 <div className="col-md-9">
                     <ContainerPage TogglePage={TogglePage} setTogglePage={setTogglePage} data={volenters}/>
                 </div>

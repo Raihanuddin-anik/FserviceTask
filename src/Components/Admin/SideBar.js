@@ -1,21 +1,28 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const SideBar = ({setTogglePage}) => {
     return (
         <div >
             <div className="ms-5 p-4">
-                <div className="p-2">
-                 
-                    <small onClick={()=>setTogglePage('list')} style={{ color: "blueviolet",cursor:"pointer" }}>Volenter Register List</small>
+            
+                <div className="p-2 ">
+                    <Link to="/student" style={{ cursor:"pointer"}} >Student</Link>
                 </div>
                 <div className="p-2 ">
-                    <b style={{ cursor:"pointer"}} onClick={()=>setTogglePage('addFood')}>Add Food</b>
+                    <Link to="/addStudent" style={{ cursor:"pointer"}} >Add Student</Link>
                 </div>
                 <div className="p-2 ">
-                    <b style={{ cursor:"pointer"}} onClick={()=>setTogglePage('addStudent')}>Add Student</b>
+                    <Link to="/distribution" style={{ cursor:"pointer"}} >Distribution</Link>
                 </div>
                 <div className="p-2 ">
-                    <b style={{ cursor:"pointer"}} onClick={()=>setTogglePage('distribution')}>Distribution</b>
+                    <Link to="/addFood" style={{ cursor:"pointer"}} >addFood</Link>
+                </div>
+                <div className="p-2 ">
+                    <Link to="/food" style={{ cursor:"pointer"}} >Food</Link>
+                </div>
+                <div className="p-2 ">
+                    <b style={{ cursor:"pointer"}} >Distributed To Student</b>
                 </div>
             </div>
 
